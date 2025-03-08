@@ -29,7 +29,7 @@ const Hero = () => (
     sx={{
       position: "relative",
       height: "100vh",
-      backgroundImage: "url('/banner4.png')", // Replace with actual image
+      backgroundImage: "url('/Banners.png')", // Replace with actual image
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
@@ -52,7 +52,7 @@ const Hero = () => (
         textAlign: "center",
       }}
     >
-      <Typography
+      {/* <Typography
   variant="h3"
   fontWeight="bold"
   sx={{
@@ -63,7 +63,7 @@ const Hero = () => (
   }}
 >
   No matter where you're going to, we'll take you there
-</Typography>
+</Typography> */}
 
 
       <SearchBox />

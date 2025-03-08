@@ -1,101 +1,79 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Box, Typography } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+// client/src/components/PopularDestinations.jsx
+import React from 'react';
+import { Container, Typography, Grid, Card, CardMedia, CardContent, CardActionArea } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-const destinations = [
-  {
-    name: "Millennium Bridge",
-    location: "London, UK",
-    image: "/images/millennium_bridge.jpg",
+const DestinationCard = styled(Card)(({ theme }) => ({
+  maxWidth: 345,
+  borderRadius: theme.shape.borderRadius * 2,
+  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.03)',
+    boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.15)',
   },
-  {
-    name: "Rialto Bridge",
-    location: "Venice, Italy",
-    image: "/images/rialto_bridge.jpg",
-  },
-  {
-    name: "Sea of Orange Tiles",
-    location: "Lisbon, Portugal",
-    image: "/images/lisbon.jpg",
-  },
-  {
-    name: "Monument of Berlin",
-    location: "Berlin, Germany",
-    image: "/images/berlin.jpg",
-  },
-];
+}));
 
 const PopularDestinations = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
-    ],
-  };
+  const destinations = [
+    {
+      title: 'Paris',
+      image: 'https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+    {
+      title: 'London',
+      image: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+    {
+      title: 'Rome',
+      image: 'https://images.pexels.com/photos/221148/pexels-photo-221148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+    {
+      title: 'New York',
+      image: 'https://images.pexels.com/photos/2193300/pexels-photo-2193300.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+    {
+      title: 'Tokyo',
+      image: 'https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+    {
+      title: 'Sydney',
+      image: 'https://images.pexels.com/photos/219330/pexels-photo-219330.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    },
+  ];
 
   return (
-    <Box sx={{ width: "90%", margin: "auto", mt: 4 }}>
-      <Typography variant="h5" fontWeight="bold">
+    <Container sx={{ py: 4 }}>
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: 600, color: '#EB662B', mb: 4 }}
+      >
         Popular Destinations
       </Typography>
-      <Typography color="gray" mb={3}>
-        Most popular destinations around the world, from historical places to natural wonders.
-      </Typography>
-      <Slider {...settings}>
-        {destinations.map((place, index) => (
-          <Box
-            key={index}
-            sx={{
-              position: "relative",
-              borderRadius: "12px",
-              overflow: "hidden",
-              margin: "10px",
-              height: "280px",
-            }}
-          >
-            <img
-              src={place.image}
-              alt={place.name}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "12px",
-              }}
-            />
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                width: "100%",
-                bgcolor: "rgba(0,0,0,0.6)",
-                color: "white",
-                padding: "10px",
-                borderRadius: "0 0 12px 12px",
-              }}
-            >
-              <Typography variant="subtitle1" fontWeight="bold">
-                {place.name}
-              </Typography>
-              <Typography variant="body2" sx={{ display: "flex", alignItems: "center" }}>
-                <LocationOnIcon fontSize="small" sx={{ mr: 0.5 }} />
-                {place.location}
-              </Typography>
-            </Box>
-          </Box>
+      <Grid container spacing={4}>
+        {destinations.map((destination, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4}>
+            <DestinationCard>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={destination.image}
+                  alt={destination.title}
+                />
+                <CardContent>
+                  <Typography variant="h6" align="center">
+                    {destination.title}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </DestinationCard>
+          </Grid>
         ))}
-      </Slider>
-    </Box>
+      </Grid>
+    </Container>
   );
 };
 

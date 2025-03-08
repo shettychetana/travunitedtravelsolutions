@@ -20,8 +20,14 @@ import {
 import { Menu as MenuIcon, Flight, Hotel, Assignment, BeachAccess } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleNavigation=(path)=>{
+    navigate(path);
+
+  };
   const [mobileOpen, setMobileOpen] = useState(false); 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -37,6 +43,7 @@ const Navbar = () => {
       role="presentation"
       onClick={handleDrawerToggle}
       onKeyDown={handleDrawerToggle}
+     
     >
       <List>
         <ListItem>
@@ -66,9 +73,9 @@ const Navbar = () => {
         <ListItemButton>
           <ListItemText primary="Packages" />
         </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Contact" />
-        </ListItemButton>
+        <ListItemButton onClick={()=>handleNavigation("/contact-us")}>
+  <ListItemText primary="Contact" />
+</ListItemButton>
         <ListItemButton>
           <ListItemText primary="Help" />
         </ListItemButton>
@@ -102,11 +109,14 @@ const Navbar = () => {
         >
           {/* Logo Section */}
           <Box display="flex" alignItems="center">
+            {!isMobile && (
+              
             <img
               src="/logonew1.png" // Replace with your logo
               alt="Logo"
               style={{ height: "40px", marginRight: "5px", borderRadius: "25px" }}
             />
+            )}
             {/* {!isMobile && (
               <Typography
                 variant="h6"
@@ -137,7 +147,10 @@ const Navbar = () => {
               <Button color="inherit" startIcon={<BeachAccess />} href="https://holidays.travunited.net/">
                 Holiday
               </Button>
-              <Button color="inherit">Contact</Button>
+              <Button color="inherit" onClick={() => handleNavigation("/contact-us")}>
+  Contact
+</Button>
+
               <Button color="inherit">Help</Button>
               {/* <Button color="inherit">Sign Up</Button> */}
               {/* <Button
@@ -152,9 +165,23 @@ const Navbar = () => {
 
           {/* Mobile Menu Icon */}
           {isMobile && (
-            <IconButton color="inherit" edge="end" onClick={handleDrawerToggle}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+
+
+<div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+            <img
+              src="/logonew1.png" // Replace with your logo
+              alt="Logo"
+              style={{ height: "20px", marginRight: "5px", borderRadius: "25px" }}
+            />
+          </div>
+          
+            <IconButton color="inherit" edge="end" onClick={handleDrawerToggle} style={{ color: "black" }}>
               <MenuIcon />
             </IconButton>
+            </div>
+           
+
           )}
         </Toolbar>
 
